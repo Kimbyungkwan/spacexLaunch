@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useStores } from '../../stores/context';
-
+import {State} from '../../stores/marker/SpacexStore'
 import {observer} from 'mobx-react'
 
 const Contents: React.FC = ()=> {
@@ -10,7 +10,8 @@ const Contents: React.FC = ()=> {
     return (
         <Wrap>
             {  
-                spacexStore.flightList.map((item,i)=>(
+                spacexStore.State === 'all'
+                ? spacexStore.flightList.map((item,i)=>(
                     <div key={i}>
                         <img src={item.links.mission_patch} alt={item.mission_name +'_'+ item.launch_year}/>
                         <p>{item.flight_number}</p>
@@ -23,6 +24,21 @@ const Contents: React.FC = ()=> {
                         
                     </div>
                 ))
+                : spacexStore.State === 'toggle'
+                    ? spacexStore.LaunchSuccessList.map((item,i)=>(
+                        <div key={i}>
+                            <img src={item.links.mission_patch} alt={item.mission_name +'_'+ item.launch_year}/>
+                            <p>{item.flight_number}</p>
+                            <p>{item.mission_name}</p>
+                            <p>{item.launch_year}</p>
+                            {/* <p>{item.details}</p> */}
+                            <p>{item.launch_success ? 'true' : 'false'}</p>
+                            <p>{item.rocket.rocket_name}</p>
+                            <p>{item.rocket.rocket_type}</p>
+                            
+                        </div>
+                    ))
+                    : '뭥'
              }
         </Wrap>
     )

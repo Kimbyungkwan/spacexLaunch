@@ -10,7 +10,7 @@ const Toggle = () => {
     const {spacexStore}=useStores();
     const [checked, setChecked] = useState(false);
     const handleChange = (nextChecked: React.SetStateAction<boolean>) => {
-        spacexStore.launchToggle(checked);
+        spacexStore.launchToggle(!checked);
         setChecked(nextChecked);
     };
     return (

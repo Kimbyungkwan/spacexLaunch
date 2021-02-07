@@ -20,6 +20,15 @@ export type Flight={
     details:string;
 }
 
+type AllState={
+    state:'all'
+}
+
+type ToggleState={
+    state:'toggle'
+}
+
+export type State= 'all' | 'toggle'
 
 class SpacexStore{
     constructor(root:RootStore){
@@ -30,8 +39,13 @@ class SpacexStore{
     rootStore:RootStore;
 
     @observable
+    State:State='all';
+
+    @observable
     flightList:Flight[] =[];
 
+    @observable
+    LaunchSuccessList:Flight[] =[];
 
     @action
     getFlight = async () => {
@@ -46,7 +60,14 @@ class SpacexStore{
 
     @action
     launchToggle = (bool:boolean) =>{
-        this.flightList = this.flightList.filter(item=>item.launch_success === bool);
+        this.State="toggle";
+        if(bool){
+            if(this.LaunchSuccessList.length === 0){
+                this.LaunchSuccessList = this.flightList.filter(item=>item.launch_success === bool);
+            }
+        }else{
+            this.State="all";
+        }
     }
 
 }
