@@ -22,28 +22,33 @@ export type Flight={
 
 
 class SpacexStore{
-
     constructor(root:RootStore){
         this.rootStore = root;
         makeObservable(this)
     }
+
     rootStore:RootStore;
 
     @observable
     flightList:Flight[] =[];
 
 
-
     @action
     getFlight = async () => {
         try {
-            const res = await axios.get('https://api.spacexdata.com/v3/launches');
+            const res = await axios.get('https://api.spacexdata.com/v3/launches?limit=50');
             this.flightList = await res.data;
             console.log(res.data);
         } catch (e) {
             throw new Error('not')
         }
     }
+
+    @action
+    launchToggle = (bool:boolean) =>{
+        this.flightList = this.flightList.filter(item=>item.launch_success === bool);
+    }
+
 }
 
 export default SpacexStore;
