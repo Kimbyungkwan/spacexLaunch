@@ -5,19 +5,19 @@ import Contents from '../section/contents';
 import { useStores } from '../../stores/context';
 import {observer} from 'mobx-react';
 import Toggle from '../toggle/toggle';
+import MainContainer from '../../containers/main/mainContainer';
 
 const Main: React.FC=() =>{
     
     return (
         <>
             <Header/>
-            <Toggle/>
-             <Contents/>
+             <MainContainer/>
         </>
     )
 }
 
-export default observer(Main)
+export default Main
 
 const Wrap=styled.div`
 `

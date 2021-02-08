@@ -4,15 +4,21 @@ import { useStores } from '../../stores/context';
 import {State} from '../../stores/marker/SpacexStore'
 import {observer} from 'mobx-react'
 
-const Contents: React.FC = ()=> {
-    const {spacexStore} = useStores();
+interface Props{
+    flightList:any,
+    state:State,
+    LaunchSuccessList:any
+}
+
+const Contents: React.FC<Props> = ({flightList,state,LaunchSuccessList})=> {
+    
 
     return (
         <Wrap>
             {  
-                spacexStore.State === 'all'
-                ? spacexStore.flightList.map((item,i)=>(
-                    <div key={i}>
+                state === 'all'
+                ? flightList.map((item:any)=>(
+                    <div>
                         <img src={item.links.mission_patch} alt={item.mission_name +'_'+ item.launch_year}/>
                         <p>{item.flight_number}</p>
                         <p>{item.mission_name}</p>
@@ -24,9 +30,9 @@ const Contents: React.FC = ()=> {
                         
                     </div>
                 ))
-                : spacexStore.State === 'toggle'
-                    ? spacexStore.LaunchSuccessList.map((item,i)=>(
-                        <div key={i}>
+                : state === 'toggle'
+                    ? LaunchSuccessList.map((item:any)=>(
+                        <div >
                             <img src={item.links.mission_patch} alt={item.mission_name +'_'+ item.launch_year}/>
                             <p>{item.flight_number}</p>
                             <p>{item.mission_name}</p>
@@ -44,7 +50,7 @@ const Contents: React.FC = ()=> {
     )
 }
 
-export default observer(Contents)
+export default Contents
 
 const Wrap = styled.div`
     max-width:1000px;

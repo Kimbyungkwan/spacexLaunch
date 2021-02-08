@@ -8,12 +8,12 @@ import { Provider } from "mobx-react";
 import RootStore from './stores/rootStrore';
 import{StoreProvider} from './stores/context';
 
-const rootStore = new RootStore();
+const root = new RootStore();
 
 ReactDOM.render(
-  <StoreProvider value = {rootStore}>
+  <Provider {...root}>
     <App />
-  </StoreProvider>,
+  </Provider>,
   document.getElementById('root')
 );
 

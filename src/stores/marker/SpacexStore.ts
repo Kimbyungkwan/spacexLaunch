@@ -42,10 +42,10 @@ class SpacexStore{
     State:State='all';
 
     @observable
-    flightList:Flight[] =[];
+    flightList:any[] =[];
 
     @observable
-    LaunchSuccessList:Flight[] =[];
+    LaunchSuccessList:any[] =[];
 
     @action
     getFlight = async () => {
@@ -60,8 +60,8 @@ class SpacexStore{
 
     @action
     launchToggle = (bool:boolean) =>{
-        this.State="toggle";
         if(bool){
+            this.State="toggle";
             if(this.LaunchSuccessList.length === 0){
                 this.LaunchSuccessList = this.flightList.filter(item=>item.launch_success === bool);
             }

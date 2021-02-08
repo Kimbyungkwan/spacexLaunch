@@ -1,4 +1,4 @@
-yarn add @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators
+// yarn add @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators
 
 {
     "presets": [

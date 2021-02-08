@@ -4,13 +4,15 @@ import styled from 'styled-components'
 import {observer} from 'mobx-react';
 import { useStores } from '../../stores/context';
 
+interface Props{
+    handleToggle:(bool:boolean)=>void
+}
 
+const Toggle:React.FC<Props> = ({handleToggle}) => {
 
-const Toggle = () => {
-    const {spacexStore}=useStores();
     const [checked, setChecked] = useState(false);
     const handleChange = (nextChecked: React.SetStateAction<boolean>) => {
-        spacexStore.launchToggle(!checked);
+        handleToggle(!checked);
         setChecked(nextChecked);
     };
     return (
@@ -32,7 +34,7 @@ const Toggle = () => {
     )
 }
 
-export default observer(Toggle)
+export default Toggle
 
 const Launch = styled.h4`
     margin-bottom:0.5rem;

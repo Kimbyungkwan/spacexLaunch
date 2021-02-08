@@ -6,12 +6,7 @@ import { useStores } from './stores/context';
 import {observer} from 'mobx-react';
 
 function App() {
-    const {spacexStore} = useStores();
     
-    useEffect(()=>{
-        spacexStore.getFlight();
-    },[])
-
   return (
     <>
     <Reset/>
@@ -22,4 +17,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default App;
