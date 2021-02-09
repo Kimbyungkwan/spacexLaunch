@@ -22,8 +22,8 @@ class MainContainer extends React.Component<Props> {
         this.spacexStore.launchToggle(bool);
     }
     render() {
-        const {flightList,State,LaunchSuccessList} = this.spacexStore;
-
+        const {flightList,State,LaunchSuccessList,yearList} = this.spacexStore;
+        console.log(yearList)
         return (
         <>
             <Toggle handleToggle={this.handleToggle}/>
