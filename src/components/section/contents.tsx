@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useStores } from '../../stores/context';
-import {State} from '../../stores/marker/SpacexStore'
+import {Flight, State} from '../../stores/marker/SpacexStore'
 import {observer} from 'mobx-react'
 
 interface Props{
-    flightList:any,
+    flightList:Flight[],
     state:State,
     LaunchSuccessList:any
 }

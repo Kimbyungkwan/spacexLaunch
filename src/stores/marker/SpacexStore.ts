@@ -42,7 +42,7 @@ class SpacexStore{
     State:State='all';
 
     @observable
-    flightList:any[] =[];
+    flightList:Flight[] =[];
 
     @observable
     LaunchSuccessList:any[] =[];
@@ -50,9 +50,26 @@ class SpacexStore{
     @action
     getFlight = async () => {
         try {
-            const res = await axios.get('https://api.spacexdata.com/v3/launches?limit=50');
-            this.flightList = await res.data;
-            console.log(res.data);
+            const res2 = await axios.get('https://api.spacexdata.com/v3/launches?limit=50').then(res=>res.data.map((data: any)=>{
+                const {
+                    flight_number,
+                    mission_name,
+                    launch_year,
+                    rocket,
+                    launch_success,
+                    links,
+                    details} = data;
+                return {
+                    flight_number,
+                    mission_name,
+                    launch_year,
+                    rocket,
+                    launch_success,
+                    links,
+                    details
+                }
+            }));
+            this.flightList = await res2;
         } catch (e) {
             throw new Error('not')
         }
