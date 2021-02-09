@@ -15,6 +15,7 @@ class MainContainer extends React.Component<Props> {
 
     async componentDidMount(){
        await this.spacexStore.getFlight();
+       await this.spacexStore.getYearList();
     }
 
     handleToggle = (bool:boolean) =>{

@@ -1,4 +1,4 @@
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, makeObservable, computed } from 'mobx';
 import axios from 'axios';
 import RootStore from '../rootStrore';
 
@@ -47,10 +47,19 @@ class SpacexStore{
     @observable
     LaunchSuccessList:any[] =[];
 
+    @observable
+    _yearList:string[] = [];
+
+    @computed
+    get yearList(){
+        return this._yearList
+    }
+
+
     @action
     getFlight = async () => {
         try {
-            const res2 = await axios.get('https://api.spacexdata.com/v3/launches?limit=50').then(res=>res.data.map((data: any)=>{
+            const res = await axios.get('https://api.spacexdata.com/v3/launches?limit=50').then(res=>res.data.map((item: any)=>{
                 const {
                     flight_number,
                     mission_name,
@@ -58,7 +67,7 @@ class SpacexStore{
                     rocket,
                     launch_success,
                     links,
-                    details} = data;
+                    details} = item;
                 return {
                     flight_number,
                     mission_name,
@@ -69,7 +78,7 @@ class SpacexStore{
                     details
                 }
             }));
-            this.flightList = await res2;
+            this.flightList = await res;
         } catch (e) {
             throw new Error('not')
         }
@@ -87,6 +96,16 @@ class SpacexStore{
         }
     }
 
+    @action
+    getYearList = async ()=>{
+        const list:any = []
+        const res = await axios.get('https://api.spacexdata.com/v3/launches?limit=50').then(res => res.data.filter((item:any) => {
+           if(list.indexOf(item.launch_year) === -1){
+               list.push(item.launch_year)
+           }
+        }))
+        this._yearList = list;
+    }
 }
 
 export default SpacexStore;

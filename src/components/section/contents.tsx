@@ -17,8 +17,8 @@ const Contents: React.FC<Props> = ({flightList,state,LaunchSuccessList})=> {
         <Wrap>
             {  
                 state === 'all'
-                ? flightList.map((item:any)=>(
-                    <div>
+                ? flightList.map((item:Flight)=>(
+                    <div key={item.flight_number + item.launch_year}>
                         <img src={item.links.mission_patch} alt={item.mission_name +'_'+ item.launch_year}/>
                         <p>{item.flight_number}</p>
                         <p>{item.mission_name}</p>
@@ -31,8 +31,8 @@ const Contents: React.FC<Props> = ({flightList,state,LaunchSuccessList})=> {
                     </div>
                 ))
                 : state === 'toggle'
-                    ? LaunchSuccessList.map((item:any)=>(
-                        <div >
+                    ? LaunchSuccessList.map((item:Flight)=>(
+                        <div key={item.flight_number + item.launch_year}>
                             <img src={item.links.mission_patch} alt={item.mission_name +'_'+ item.launch_year}/>
                             <p>{item.flight_number}</p>
                             <p>{item.mission_name}</p>
