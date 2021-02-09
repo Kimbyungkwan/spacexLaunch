@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from "mobx-react";
+import { Provider } from 'mobx-react';
 
 import RootStore from './stores/rootStrore';
-import{StoreProvider} from './stores/context';
+import { StoreProvider } from './stores/context';
 
 const root = new RootStore();
 
 ReactDOM.render(
-  <Provider {...root}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+	<Provider {...root}>
+		<App />
+	</Provider>,
+	document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
